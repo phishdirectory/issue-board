@@ -7,8 +7,8 @@ interface SearchFormProps {
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
-  const [org, setOrg] = useState('');
-  const [label, setLabel] = useState('');
+  const [org, setOrg] = useState('phish-directory');
+  const [label, setLabel] = useState('issue-board');
   const [token, setToken] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -30,7 +30,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
             type="text"
             value={org}
             onChange={(e) => setOrg(e.target.value)}
-            placeholder="e.g. facebook"
+            placeholder="e.g. phish-directory"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
             required
           />
@@ -44,7 +44,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
             type="text"
             value={label}
             onChange={(e) => setLabel(e.target.value)}
-            placeholder="e.g. bug"
+            placeholder="e.g. issue-board"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
             required
           />

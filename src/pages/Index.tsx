@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import SearchForm from '../components/SearchForm';
 import IssueList from '../components/IssueList';
@@ -10,6 +10,11 @@ import { useGitHubIssues } from '../hooks/useGitHubIssues';
 const Index = () => {
   const { issues, loading, error, fetchIssues } = useGitHubIssues();
 
+  // Automatically search for issues when the page loads
+  useEffect(() => {
+    fetchIssues('phish-directory', 'issue-board');
+  }, [fetchIssues]);
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
@@ -18,8 +23,8 @@ const Index = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2 text-gray-800">GitHub Issue Beacon</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Search for issues across GitHub repositories in a specific organization that are tagged with 
-            a particular label. Enter an organization name and label below to get started.
+            Displaying issues from the "phish-directory" organization tagged with 
+            the "issue-board" label. You can change the search parameters below.
           </p>
         </div>
 
