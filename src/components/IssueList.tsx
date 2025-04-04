@@ -25,10 +25,26 @@ const IssueList: React.FC<IssueListProps> = ({ issues }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 max-w-5xl mx-auto">
-      {issues.map((issue) => (
-        <IssueCard key={issue.id} issue={issue} />
-      ))}
+    <div className="grid grid-cols-1 gap-6 max-w-5xl mx-auto">
+      <div className="flex justify-between items-center mb-2 px-2">
+        <h2 className="text-xl font-semibold text-[#55625c] flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-[#1aa6b8]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+          Available Issues ({issues.length})
+        </h2>
+        <div className="text-sm text-[#55625c]">
+          <span className="bg-[#f0f5f5] px-2 py-1 rounded">
+            Last updated: {new Date().toLocaleDateString()}
+          </span>
+        </div>
+      </div>
+      
+      <div className="space-y-4">
+        {issues.map((issue) => (
+          <IssueCard key={issue.id} issue={issue} />
+        ))}
+      </div>
     </div>
   );
 };
