@@ -7,8 +7,8 @@ interface SearchFormProps {
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
-  const [org, setOrg] = useState('phish-directory');
-  const [label, setLabel] = useState('issue-board');
+  const [org] = useState('phish-directory');
+  const [label] = useState('issue-board');
   const [token, setToken] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -22,36 +22,32 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
     <form onSubmit={handleSubmit} className="w-full max-w-3xl mx-auto p-4 bg-white rounded-lg shadow-md">
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex-1">
-          <label htmlFor="org" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="org" className="block text-sm font-medium text-[#55625c] mb-1">
             GitHub Organization
           </label>
           <input
             id="org"
             type="text"
             value={org}
-            onChange={(e) => setOrg(e.target.value)}
-            placeholder="e.g. phish-directory"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            required
+            disabled
+            className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700"
           />
         </div>
         <div className="flex-1">
-          <label htmlFor="label" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="label" className="block text-sm font-medium text-[#55625c] mb-1">
             Issue Label
           </label>
           <input
             id="label"
             type="text"
             value={label}
-            onChange={(e) => setLabel(e.target.value)}
-            placeholder="e.g. issue-board"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            required
+            disabled
+            className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700"
           />
         </div>
       </div>
       <div className="mt-4">
-        <label htmlFor="token" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="token" className="block text-sm font-medium text-[#55625c] mb-1">
           GitHub Personal Access Token (optional, increases API rate limit)
         </label>
         <input
@@ -60,7 +56,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
           value={token}
           onChange={(e) => setToken(e.target.value)}
           placeholder="ghp_..."
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#1aa6b8] focus:border-[#1aa6b8]"
         />
         <p className="mt-1 text-xs text-gray-500">
           For private repositories or to increase rate limits, add a token with repo scope.
@@ -68,13 +64,13 @@ const SearchForm: React.FC<SearchFormProps> = ({ onSearch, isLoading }) => {
       </div>
       <button
         type="submit"
-        disabled={isLoading || !org || !label}
+        disabled={isLoading}
         className={`mt-4 w-full py-2 px-4 rounded-md text-white font-medium 
-                  ${isLoading || !org || !label
+                  ${isLoading
             ? 'bg-gray-400 cursor-not-allowed'
-            : 'bg-[#2ea44f] hover:bg-[#2c974b] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500'}`}
+            : 'bg-[#1aa6b8] hover:bg-[#83bab4] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#83bab4]'}`}
       >
-        {isLoading ? 'Loading...' : 'Search Issues'}
+        {isLoading ? 'Loading...' : 'Refresh Issues'}
       </button>
     </form>
   );

@@ -70,7 +70,7 @@ const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
             href={issue.html_url} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="text-lg font-semibold text-[#0969da] hover:underline flex items-center gap-1"
+            className="text-lg font-semibold text-[#1aa6b8] hover:underline flex items-center gap-1"
           >
             #{issue.number} {issue.title}
             <ExternalLink size={16} className="inline" />
@@ -92,9 +92,9 @@ const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
           ))}
         </div>
 
-        <p className="text-gray-600 text-sm mb-4">{getBodyExcerpt(issue.body)}</p>
+        <p className="text-[#55625c] text-sm mb-4">{getBodyExcerpt(issue.body)}</p>
 
-        <div className="flex justify-between items-center text-xs text-gray-500 mt-2">
+        <div className="flex justify-between items-center text-xs text-[#55625c] mt-2">
           <div className="flex items-center gap-2">
             <img 
               src={issue.user.avatar_url} 
@@ -105,7 +105,7 @@ const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
               href={issue.user.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#0969da] hover:underline"
+              className="hover:text-[#1aa6b8] hover:underline"
             >
               @{issue.user.login}
             </a>
@@ -113,7 +113,7 @@ const IssueCard: React.FC<IssueCardProps> = ({ issue }) => {
 
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1">
-              <span className={`w-2 h-2 rounded-full ${issue.state === 'open' ? 'bg-green-500' : 'bg-purple-500'}`}></span>
+              <span className={`w-2 h-2 rounded-full ${issue.state === 'open' ? 'bg-[#83bab4]' : 'bg-[#cbac91]'}`}></span>
               {issue.state}
             </span>
             
