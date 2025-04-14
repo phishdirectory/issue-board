@@ -28,7 +28,7 @@ export function useGitHubIssues(): UseGitHubIssuesReturn {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterOptions>({
-    org: "phish-directory",
+    org: "phishdirectory",
     label: "issue-board",
     state: "open",
     sort: "updated",
