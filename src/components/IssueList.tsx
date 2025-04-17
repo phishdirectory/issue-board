@@ -24,6 +24,21 @@ const IssueList: React.FC<IssueListProps> = ({ issues }) => {
     );
   }
 
+  // Group issues by repository
+  const issuesByRepo: Record<string, Issue[]> = {};
+  
+  issues.forEach(issue => {
+    // Extract repo name from URL: https://github.com/phishdirectory/repo-name/issues/123
+    const urlParts = issue.html_url.split('/');
+    const repoIndex = urlParts.findIndex(part => part === 'phishdirectory') + 1;
+    const repoName = repoIndex < urlParts.length ? urlParts[repoIndex] : 'Unknown';
+    
+    if (!issuesByRepo[repoName]) {
+      issuesByRepo[repoName] = [];
+    }
+    issuesByRepo[repoName].push(issue);
+  });
+
   return (
     <div className="grid grid-cols-1 gap-6 max-w-5xl mx-auto">
       <div className="flex justify-between items-center mb-2 px-2">
@@ -40,9 +55,18 @@ const IssueList: React.FC<IssueListProps> = ({ issues }) => {
         </div>
       </div>
       
-      <div className="space-y-4">
-        {issues.map((issue) => (
-          <IssueCard key={issue.id} issue={issue} />
+      <div className="space-y-8">
+        {Object.entries(issuesByRepo).map(([repoName, repoIssues]) => (
+          <div key={repoName} className="space-y-4">
+            <h3 className="text-lg font-medium text-[#55625c] bg-[#f0f5f5] p-2 rounded-lg">
+              {repoName} <span className="text-sm font-normal">({repoIssues.length} issues)</span>
+            </h3>
+            <div className="space-y-4">
+              {repoIssues.map((issue) => (
+                <IssueCard key={issue.id} issue={issue} />
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </div>

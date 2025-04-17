@@ -5,6 +5,7 @@ import { Issue } from "../components/IssueCard";
 export interface FilterOptions {
   org: string;
   label: string;
+  additionalLabels?: string[];
   language?: string;
   repo?: string;
   state?: "open" | "closed" | "all";
@@ -13,13 +14,20 @@ export interface FilterOptions {
   perPage?: number;
 }
 
+export interface RepoDetails {
+  name: string;
+  description: string;
+  html_url: string;
+}
+
 interface UseGitHubIssuesReturn {
   issues: Issue[];
   loading: boolean;
   error: string | null;
   fetchIssues: (options: FilterOptions, token?: string) => Promise<void>;
+  fetchRepoDetails: (org: string, token?: string) => Promise<RepoDetails[]>;
   filters: FilterOptions;
-  setFilter: (key: keyof FilterOptions, value: string | number) => void;
+  setFilter: (key: keyof FilterOptions, value: string | number | string[] | undefined) => void;
   applyFilters: () => Promise<void>;
 }
 
@@ -37,7 +45,7 @@ export function useGitHubIssues(): UseGitHubIssuesReturn {
   });
   const [token, setToken] = useState<string | undefined>(undefined);
 
-  const setFilter = (key: keyof FilterOptions, value: string | number) => {
+  const setFilter = (key: keyof FilterOptions, value: string | number | string[] | undefined) => {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
@@ -64,6 +72,13 @@ export function useGitHubIssues(): UseGitHubIssuesReturn {
 
       // Build the query based on filter options
       let query = `label:"${encodeURIComponent(options.label)}"+org:${encodeURIComponent(options.org)}`;
+      
+      // Add additional labels if present
+      if (options.additionalLabels && options.additionalLabels.length > 0) {
+        options.additionalLabels.forEach((label) => {
+          query += `+label:"${encodeURIComponent(label)}"`;
+        });
+      }
       
       // Add optional filters
       if (options.state && options.state !== "all") {
