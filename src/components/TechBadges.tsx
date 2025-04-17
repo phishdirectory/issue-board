@@ -2,7 +2,7 @@ import React from "react";
 import { FilterOptions } from "../hooks/useGitHubIssues";
 
 interface TechBadgesProps {
-  setFilter: (key: keyof FilterOptions, value: string) => void;
+  setFilter: (key: keyof FilterOptions, value: string | number | string[] | undefined) => void;
   applyFilters: () => Promise<void>;
 }
 
